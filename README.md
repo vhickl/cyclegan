@@ -4,17 +4,19 @@ The rise of machine learning (ML) for scientific research calls for large amount
 
 This repository builds a model that takes generated fake images, and makes them look real. This is done via image-to-image translation, and in particular, using a [cycleGAN](https://arxiv.org/abs/1703.10593) architecure. This repo has been used in research projects related to [STEM images of 2D materials](https://www.nature.com/articles/s41524-023-01042-3) and more recently to [images of bacterial colonies](https://arxiv.org/abs/2405.12407).
 
-To get started, all you need are two folders. One containing a set of real images, and one containing a set of fake images. For minimal changes in the code, these images will need to be in TIF/TIFF format. You will also need the following modules installed:
+To get started, all you need are two folders. One containing a set of real images, and one containing a set of fake images. For minimal changes in the code, these images will need to be in TIF/TIFF format. You will also need the following modules installed (versions are the ones used for our work on bacterial segmentation):
 
-* tensorflow
-* scipy
-* tensorflow_examples
-* tifffile
-* PIL
+* tensorflow (2.10.1)
+* scipy (1.13.1)
+* tensorflow_examples (0.1703207612.1461250479831370929614362828255168868146460245314)
+* tifffile (2024.5.2)
+* PIL (pillow 10.3.0)
+
+We recommend using a device with an Nvidia GPU and CUDA installed (we used release 11.6, V11.6.55), as the code has not been tested on other hardware. In principle, any device able to use tensorflow should work.
 
 There are 3 notebooks that you will run to get your desired set of generated images
 
-1. `cycleGAN bin_cross.ipynb` - This notebook will train the cycleGAN. Once you have generated and real images in their respective folder, assign their paths in the second cell. With a Nvidia 3090 GPU, this takes around 6-8 hours depending on the size of the dataset.
+1. `cycleGAN bin_cross.ipynb` - This notebook will train the cycleGAN. Once you have generated and real images in their respective folder, assign their paths in the second cell. With a Nvidia 3090 GPU, this takes around 6-8 hours depending on the size of the dataset. 
   
 2. `FID_Score.ipynb` - Once the training finishes, we need to choose the best training checkpoint that makes the generated images as close to the real images. This notebook will use the FID score between generated images from a given checkpoint and the real image dataset, and give the checkpoint with the lowest score.
 
